@@ -100,8 +100,11 @@ function manageButtons() {
     // Manage Inventory Page
     $('#btnExtractManage').click(function () {
         chrome.storage.local.set({ "pageEnabled": "manageInventory" });
-        chrome.tabs.executeScript({
-            file: "content.js"
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                files: ["content.js"]
+            });
         });
         $("#btnExtractManage").attr("disabled", true);
         $("#btnExtractManage").html("Copied!");
@@ -137,8 +140,11 @@ function manageButtons() {
     // Price Alert Page
     $('#btnExtractPrice').click(function () {
         chrome.storage.local.set({ "pageEnabled": "priceAlerts" });
-        chrome.tabs.executeScript({
-            file: "content.js"
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                files: ["content.js"]
+            });
         });
         $("#btnExtractPrice").attr("disabled", true);
         $("#btnExtractPrice").html("Copied!");
@@ -161,8 +167,11 @@ function manageButtons() {
 
     $('#btnExtractAmazon').click(function () {
         chrome.storage.local.set({ "pageEnabled": "amazonPage" });
-        chrome.tabs.executeScript({
-            file: "content.js"
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                files: ["content.js"]
+            });
         });
         $("#btnExtractAmazon").attr("disabled", true);
         $("#btnExtractAmazon").html("Copied!");
@@ -179,8 +188,11 @@ function manageButtons() {
             copyToClipboard(data.join("\n"))
         })
         chrome.storage.local.set({ "pageEnabled": "amazonPage" });
-        chrome.tabs.executeScript({
-            file: "content.js"
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.scripting.executeScript({
+                target: {tabId: tabs[0].id},
+                files: ["content.js"]
+            });
         });
         $("#btnCopyAllUrls").attr("disabled", true);
         $("#btnCopyAllUrls").html("Copied!");
@@ -268,8 +280,11 @@ function manageUploadFeed() {
 
             // reload page
             chrome.tabs.update({ url: `https://sellercentral.amazon.com/listing/upload?ref_=xx_upload_tnav_status` });
-            chrome.tabs.executeScript({
-                file: 'content.js'
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.scripting.executeScript({
+                    target: {tabId: tabs[0].id},
+                    files: ["content.js"]
+                });
             });
         });
     });
